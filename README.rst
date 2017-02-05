@@ -4,7 +4,7 @@ django-select2-tags
 |Build Status| |Coverage Status|
 
 **django-select2-tags** provides a form class and form fields to handle storing new Django model
-values created using `Select2 <http://ivaynberg.github.com/select2/>` fields with tags enabled.
+values created using Select2_ fields with tags enabled.
 
 Tested on Python 2.7 and 3.5 with Django 1.10.
 
@@ -125,3 +125,4 @@ Install your local copy:
 .. |Coverage Status| image:: https://img.shields.io/coveralls/jessamynsmith/django-select2-tags.svg
    :target: https://coveralls.io/r/jessamynsmith/django-select2-tags?branch=master
    :alt: Coverage status
+.. _Select2: http://ivaynberg.github.com/select2/
