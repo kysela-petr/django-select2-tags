@@ -1,0 +1,4 @@
+[run]
+source = select2_tags
+branch = 1
+omit = */test/*

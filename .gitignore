@@ -1,0 +1,13 @@
+/build
+/dist
+/*.egg-info
+*.pyc
+*.log
+*.egg
+*.db
+*.pid
+.coverage
+.tox
+pip-log.txt
+.DS_Store
+*swp
