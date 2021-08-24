@@ -24,7 +24,7 @@ class Select2Mixin(object):
                     self.new_items.add(pk)
         return pk_values
 
-    def save_new_values(self):
+    def save_new_values(self, supervisor_id=None):
         """
         Save any new values (tags) entered in the select2 box
         """
@@ -33,6 +33,8 @@ class Select2Mixin(object):
         created_ids = []
         for item in self.new_items:
             create_kwargs = {self.value_field: item}
+            if supervisor_id:
+                create_kwargs['supervisor_id'] = supervisor_id
             new_object = self.queryset.model.objects.create(**create_kwargs)
             created_ids.append(new_object.pk)
         created_items = self.queryset.model.objects.filter(pk__in=created_ids)
@@ -69,10 +71,13 @@ class Select2ModelForm(forms.ModelForm):
             field = self.fields[field_name]
             if isinstance(field, Select2Mixin):
                 if field.save_new:
-                    new_values = field.save_new_values()
+                    if self.supervisor_id and field_name in ['category']:
+                        new_values = field.save_new_values(supervisor_id=self.supervisor_id)
+                    else:
+                        new_values = field.save_new_values()
                     if new_values:
                         model_field = getattr(instance, field_name)
-                        if isinstance(field, Select2ModelMultipleChoiceField):
+                        if isinstance(field, Select2ModelMultipleChoiceField) or model_field is not None:
                             model_field.add(*new_values)
                         else:
                             setattr(instance, field_name, new_values[0])
