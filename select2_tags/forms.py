@@ -45,6 +45,8 @@ class Select2ModelChoiceField(Select2Mixin, forms.ModelChoiceField):
     """ Handle creation of a new value in a choice field in the UI """
 
     def to_python(self, value):
+        if value is '':
+            return None
         pk_values = self.separate_new_values([value])
         if pk_values:
             return super(Select2ModelChoiceField, self).to_python(value)
